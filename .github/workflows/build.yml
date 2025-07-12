@@ -1,26 +1,31 @@
-# From https://github.com/marketplace/actions/buildozer-action
-name: Build
+name: Build APK with Buildozer
+
 on: [push, pull_request]
 
 jobs:
-  # Build job. Builds app for Android with Buildozer
   build-android:
-    name: Build for Android
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-      - name: Build with Buildozer
+      - name: Install Android NDK manually (r25b)
+        run: |
+          mkdir -p $HOME/.buildozer/android/platform
+          wget -q https://dl.google.com/android/repository/android-ndk-r25b-linux.zip -O ndk.zip
+          unzip ndk.zip -d $HOME/.buildozer/android/platform
+          mv $HOME/.buildozer/android/platform/android-ndk-r25b $HOME/.buildozer/android/platform/android-ndk-r25b-linux
+
+      - name: Build APK using Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
           command: buildozer android debug
           buildozer_version: stable
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v2
         with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          name: dicom-viewer-apk
+          path: bin/*.apk
