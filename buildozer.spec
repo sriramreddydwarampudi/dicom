@@ -1,6 +1,6 @@
 [app]
-title = DICOM Viewer
-package.name = dicomviewer
+title = dicomlator
+package.name = dicomlator
 package.domain = org.example
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
