@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v4
+        uses: ArtemSBulgakov/buildozer-action@v2
         id: buildozer
         with:
           command: buildozer android debug
