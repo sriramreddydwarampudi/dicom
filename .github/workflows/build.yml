@@ -1,28 +1,36 @@
-on: [push, pull_request]
+name: Build Android APK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 jobs:
-  # Build job. Builds app for Android with Buildozer
-  build-android:
-    name: Build for Android
+  build:
+    name: Build with Buildozer
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-      - name: Build APK with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          workdir: test_app
-          buildozer_version: stable
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y zip unzip openjdk-17-jdk python3-pip python3-setuptools
 
-      - name: Upload artifacts
-      - name: Upload built APK
+      - name: Fix setuptools + pip
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install "setuptools>=67,<70" setuptools-scm
+
+      - name: Build APK
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          command: buildozer android debug
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: package
-          name: MyApp-APK
-          path: ${{ steps.buildozer.outputs.filename }}
+          name: dicomlator.apk
+          path: bin/*.apk
