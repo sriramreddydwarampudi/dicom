@@ -27,9 +27,9 @@ android.private_storage = False
 android.enable_androidx = False
 
 # Optional: enforce minimum API level
-android.minapi = 33
+android.minapi = 21
 android.api = 33
-android.ndk = 33b
+android.ndk = 25b
 android.gradle_dependencies = 
 
 # (str) Presplash of the application
