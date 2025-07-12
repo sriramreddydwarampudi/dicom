@@ -12,7 +12,7 @@ fullscreen = 0
 # Set the entry point of your app
 entrypoint = main.py
 
-requirements = python3,kivy,pydicom
+requirements = python3,kivy,pydicom,numpy,matplotlib
 
 # Include icon if needed
 # icon.filename = %(source.dir)/icon.png
