@@ -5,37 +5,38 @@ package.domain = org.example
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 1
-requirements = python3,kivy,pydicom,numpy,matplotlib
+requirements = 
+    python3,
+    kivy==2.3.0,
+    pydicom==2.4.3,
+    numpy==1.26.4,
+    matplotlib==3.8.3,
+    pillow==10.2.0,
+    setuptools,
+    certifi,
+    urllib3
 orientation = portrait
 osx.kivy_version = 2.3.0
+android.p4a_dir = ./p4a_cache
+android.allow_backup = True
+android.arch = arm64-v8a
 
 [buildozer]
 log_level = 2
 warn_on_root = 1
 
 [app.android]
-# Optional: uncomment to fix version
 android.api = 30
 android.minapi = 21
 android.ndk = 25b
-android.gradle_dependencies = 
 android.sdk = 24
-android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
-# Instead of both:
-# android.archs = arm64-v8a, armeabi-v7a
+android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,INTERNET
+android.gradle_dependencies =
+android.env_vars = MPLBACKEND=agg
 
-# Use only one:
-android.arch = arm64-v8a
+[app.android.entrypoint]
+main = main:DicomViewerApp().run()
 
-
-# Optional: uncomment if your app needs to stay awake, etc.
-# android.permissions = INTERNET,WAKE_LOCK
-
-# Optional: if using Java modules
-# android.add_jars = libs/my-lib.jar
-
-# Optional: icon and presplash
-# icon.filename = %(source.dir)s/icon.png
-# presplash.filename = %(source.dir)s/splash.png
-
-
+[app:source.exclude_patterns]
+*.pyc,*.pyo,*.pyd,*.git,*.md,*.txt,*.bat,*.exe
+tests/,examples/,docs/,__pycache__/
