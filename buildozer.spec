@@ -21,6 +21,11 @@ android.ndk = 25b
 android.gradle_dependencies = 
 android.sdk = 24
 android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+# Instead of both:
+# android.archs = arm64-v8a, armeabi-v7a
+
+# Use only one:
+android.arch = arm64-v8a
 
 
 # Optional: uncomment if your app needs to stay awake, etc.
