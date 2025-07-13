@@ -17,7 +17,7 @@ requirements =
     urllib3
 orientation = portrait
 osx.kivy_version = 2.3.0
-android.p4a_dir = ./p4a_cache
+p4a.source_dir = ./p4a_cache
 android.allow_backup = True
 android.arch = arm64-v8a
 
